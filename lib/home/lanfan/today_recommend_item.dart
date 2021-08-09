@@ -62,10 +62,10 @@ class TodayRecommendItem extends StatelessWidget {
   // }
 
   Widget _buildItem(BuildContext context, int index) {
-    // String recommendTitle = "";
-    // if (data[index] != null) {
-    //   recommendTitle = data[index].name;
-    // }
+    String recommendTitle = "";
+    if (data[index] != null) {
+      recommendTitle = data[index].name;
+    }
 
     return GestureDetector(
       onTap: () {
@@ -80,24 +80,25 @@ class TodayRecommendItem extends StatelessWidget {
             _buildItemImage(index),
             Positioned(
               top: ScreenUtil().setWidth(16),
-              left: ScreenUtil().setWidth(16),
+              right: ScreenUtil().setWidth(16),
               child: Container(
-                alignment: Alignment.center,
-                width: ScreenUtil().setWidth(75),
-                height: ScreenUtil().setWidth(32),
+                // alignment: Alignment.center,
+                width: ScreenUtil().setWidth(93),
+                height: ScreenUtil().setWidth(26),
                 decoration: new BoxDecoration(
                   //背景
                   color: ThemeColors.colorWhite,
                   //设置四周圆角 角度
                   borderRadius:
-                  BorderRadius.all(Radius.circular(ScreenUtil().setWidth(6))),
+                  BorderRadius.all(Radius.circular(ScreenUtil().setWidth(25))),
                 ),
                     child:Row(
                         children: <Widget>[
+                          SizedBox(width: ScreenUtil().setWidth(10)),
                           Image.asset('images/ic_pro_tag.png',
                               width: ScreenUtil().setWidth(16),
                               height: ScreenUtil().setWidth(16),
-                              fit: BoxFit.fill),
+                              fit: BoxFit.scaleDown),
                           SizedBox(width: ScreenUtil().setWidth(10)),
                           Text(
                             "Pro Only",
@@ -115,12 +116,8 @@ class TodayRecommendItem extends StatelessWidget {
                 width: ScreenUtil().setWidth(105),
                 height: ScreenUtil().setWidth(73),
                 child: Text(
-                  "Apple Pastry",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: ScreenUtil().setSp(32),
-                      fontFamily: 'SFProText',
-                      fontWeight: FontWeight.bold),
+                  recommendTitle,
+                  style:ThemeStyles.title1,
                 ),
               ),
             ),

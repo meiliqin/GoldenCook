@@ -23,4 +23,10 @@ class ThemeStyles {
       fontSize: ScreenUtil().setSp(11),
       fontFamily: 'SFProText',
       fontWeight: FontWeight.w600);
+
+  static  TextStyle title1 = TextStyle(
+      color: ThemeColors.colorWhite,
+      fontSize: ScreenUtil().setSp(28),
+      fontFamily: 'SFProDisplay',
+      fontWeight: FontWeight.w700);
 }

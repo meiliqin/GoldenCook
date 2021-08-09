@@ -23,15 +23,14 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
   ScrollController _scrollController;
   FloatingActionButton _floatingActionButton;
   RecipeVideoPlayer _headVideoPlayer;
+
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController()
-      ..addListener(() =>
-          setState(() {
+      ..addListener(() => setState(() {
             print(
-                'Scroll view Listener is called offset ${_scrollController
-                    .offset}');
+                'Scroll view Listener is called offset ${_scrollController.offset}');
           }));
 
     _floatingActionButton = new FloatingActionButton(
@@ -44,11 +43,15 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
 
     getData();
   }
+
   @override
-   void dispose() {
-   //  _headVideoPlayer.dispose();
+  void dispose() {
+    //  _headVideoPlayer.dispose();
     super.dispose();
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +60,7 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
         slivers: <Widget>[
           new SliverAppBar(
             // title: Text("标题"),
-            expandedHeight: ScreenUtil().setWidth(256),
+            expandedHeight: ScreenUtil().screenWidth,
             floating: false,
             pinned: true,
             snap: false,
@@ -105,14 +108,15 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
     );
   }
 
-  _buildDivider(){
-    return  Divider(
+  _buildDivider() {
+    return Divider(
       thickness: ScreenUtil().setWidth(1),
       color: ThemeColors.colorDivider,
       indent: ScreenUtil().setWidth(24),
       endIndent: ScreenUtil().setWidth(24),
     );
   }
+
   _buildRecipeInfo() {
     return new Container(
       padding: EdgeInsets.all(ScreenUtil().setWidth(24)),
@@ -120,7 +124,9 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            _recipeDetailModel!=null?_recipeDetailModel.title:"Marinated Steak",
+            _recipeDetailModel != null
+                ? _recipeDetailModel.title
+                : "Marinated Steak",
             style: TextStyle(
                 color: Colors.black,
                 fontSize: ScreenUtil().setSp(32),
@@ -158,28 +164,28 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
           ScreenUtil().setWidth(24),
           ScreenUtil().setWidth(32)),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-         children: _createIngredientsChildren()
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _createIngredientsChildren()
           //<Widget>[
-        //
-        //   SizedBox(height: ScreenUtil().setWidth(16)),
-        //   Text(
-        //     "1/2 cup vegetable oil\n" +
-        //         "1/3 cup soy sauce\n" +
-        //         "1/4 cup red wine vinegar\n" +
-        //         "1/2 tablespoons Worcestershire sauce\n" +
-        //         "1 tablespoon Dijon mustard2 cloves garlic,minced\n" +
-        //         "1/2 teaspoon ground black pepper\n" +
-        //         "1/2 pounds flank steak",
-        //     style: TextStyle(
-        //         color: Colors.black,
-        //         fontSize: ScreenUtil().setSp(16),
-        //         fontFamily: 'SFProText',
-        //         fontWeight: FontWeight.normal,
-        //         height: 1.5),
-        //   ),
-        // ],
-      ),
+          //
+          //   SizedBox(height: ScreenUtil().setWidth(16)),
+          //   Text(
+          //     "1/2 cup vegetable oil\n" +
+          //         "1/3 cup soy sauce\n" +
+          //         "1/4 cup red wine vinegar\n" +
+          //         "1/2 tablespoons Worcestershire sauce\n" +
+          //         "1 tablespoon Dijon mustard2 cloves garlic,minced\n" +
+          //         "1/2 teaspoon ground black pepper\n" +
+          //         "1/2 pounds flank steak",
+          //     style: TextStyle(
+          //         color: Colors.black,
+          //         fontSize: ScreenUtil().setSp(16),
+          //         fontFamily: 'SFProText',
+          //         fontWeight: FontWeight.normal,
+          //         height: 1.5),
+          //   ),
+          // ],
+          ),
     );
   }
 
@@ -191,16 +197,16 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
           ScreenUtil().setWidth(24),
           ScreenUtil().setWidth(32)),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children:
-          _createInstructionChildren(),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: _createInstructionChildren(),
       ),
     );
   }
 
   List<Widget> _createIngredientsChildren() {
     List<Widget> widgets = new List<Widget>();
-    if(_recipeDetailModel==null ||_recipeDetailModel.ingredientList==null){
+    if (_recipeDetailModel == null ||
+        _recipeDetailModel.ingredientList == null) {
       return widgets;
     }
 
@@ -213,18 +219,18 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
           fontWeight: FontWeight.bold,
           height: 1.5),
     ));
-    widgets.add( SizedBox(height: ScreenUtil().setWidth(16)));
-    int ingredientIndex=0;
-    for(Ingredient ingredient in _recipeDetailModel.ingredientList){
+    widgets.add(SizedBox(height: ScreenUtil().setWidth(16)));
+    int ingredientIndex = 0;
+    for (Ingredient ingredient in _recipeDetailModel.ingredientList) {
       ingredientIndex++;
       widgets.add(_buildIng(ingredient));
     }
     return widgets;
-
   }
+
   List<Widget> _createInstructionChildren() {
     List<Widget> widgets = new List<Widget>();
-    if(_recipeDetailModel==null ||_recipeDetailModel.stepList==null){
+    if (_recipeDetailModel == null || _recipeDetailModel.stepList == null) {
       return widgets;
     }
     widgets.add(Text(
@@ -237,8 +243,8 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
           height: 1.5),
     ));
 
-    int stepIndex=0;
-    for(Instruction instruction in _recipeDetailModel.stepList){
+    int stepIndex = 0;
+    for (Instruction instruction in _recipeDetailModel.stepList) {
       stepIndex++;
       widgets.add(_buildStep(stepIndex, instruction));
     }
@@ -256,7 +262,7 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
         color: ThemeColors.colorLabelBg,
         //设置四周圆角 角度
         borderRadius:
-        BorderRadius.all(Radius.circular(ScreenUtil().setWidth(6))),
+            BorderRadius.all(Radius.circular(ScreenUtil().setWidth(6))),
       ),
       child: Text(
         text,
@@ -268,36 +274,39 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
       ),
     );
   }
-  _buildIng(Ingredient ingredient){
+
+  _buildIng(Ingredient ingredient) {
     return Row(
-      mainAxisAlignment:MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            ingredient.name,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: ScreenUtil().setSp(16),
-                fontFamily: 'SFProText',
-                fontWeight: FontWeight.normal,
-                height: 1.5),
-          ),
-          Text(
-            ingredient.amount,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: ScreenUtil().setSp(16),
-                fontFamily: 'SFProText',
-                fontWeight: FontWeight.normal,
-                height: 1.5),
-          ),
-          ],);
+      children: <Widget>[
+        Text(
+          ingredient.name,
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: ScreenUtil().setSp(16),
+              fontFamily: 'SFProText',
+              fontWeight: FontWeight.normal,
+              height: 1.5),
+        ),
+        Text(
+          ingredient.amount,
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: ScreenUtil().setSp(16),
+              fontFamily: 'SFProText',
+              fontWeight: FontWeight.normal,
+              height: 1.5),
+        ),
+      ],
+    );
   }
+
   _buildStep(int index, Instruction instruction) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-           SizedBox(height: ScreenUtil().setWidth(16)),
+          SizedBox(height: ScreenUtil().setWidth(16)),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -325,15 +334,15 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
               ),
               Expanded(
                   child: Text(
-                    // "A wonderful flank steak on the grill recipe I invented that friends just love My girls think this is great,and it doesn't take long to girl.This also works great when sliced and used for fajitas",
-                    instruction.text,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: ScreenUtil().setSp(16),
-                        fontFamily: 'SFProText',
-                        fontWeight: FontWeight.normal,
-                        height: 1.5),
-                  )),
+                // "A wonderful flank steak on the grill recipe I invented that friends just love My girls think this is great,and it doesn't take long to girl.This also works great when sliced and used for fajitas",
+                instruction.text,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: ScreenUtil().setSp(16),
+                    fontFamily: 'SFProText',
+                    fontWeight: FontWeight.normal,
+                    height: 1.5),
+              )),
             ],
           ),
           // RecipeVideoPlayer(),
@@ -347,8 +356,9 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
               child: CachedNetworkImage(
                 imageUrl: Api.convetChuimgSize500(instruction.img),
                 fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    Image.asset('images/placeholder_efefef.png', fit: BoxFit.cover),
+                placeholder: (context, url) => Image.asset(
+                    'images/placeholder_efefef.png',
+                    fit: BoxFit.cover),
                 // errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
@@ -364,8 +374,8 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
         // showContent();
         setState(() {
           _recipeDetailModel = recipeDetailModel;
-          print("RecipeDetailModel getData2 ${_recipeDetailModel.stepList.length}");
-
+          print(
+              "RecipeDetailModel getData2 ${_recipeDetailModel.stepList.length}");
         });
       } else {
         // showEmpty();
@@ -377,5 +387,4 @@ class RecipePicTextPageState extends State<RecipePicTextPage> {
       });
     }, 0);
   }
-
 }
